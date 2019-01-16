@@ -130,8 +130,8 @@ class LoginPage extends Component {
               placeholder={formatMessage({ id: 'user-login.verification-code.placeholder' })}
               countDown={120}
               onGetCaptcha={this.onGetCaptcha}
-              getCaptchaButtonText={formatMessage({ id: 'user-login.form.get-captcha' })}
-              getCaptchaSecondText={formatMessage({ id: 'user-login.captcha.second' })}
+              // getCaptchaButtonText={formatMessage({ id: 'user-login.form.get-captcha' })}
+              // getCaptchaSecondText={formatMessage({ id: 'user-login.captcha.second' })}
               rules={[
                 {
                   required: true,

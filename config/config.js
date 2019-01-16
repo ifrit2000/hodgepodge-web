@@ -34,16 +34,16 @@ export default {
    * 路由相关配置
    */
   routes: [
-    {
-      path: '/login',
-      component: '../layouts/BlankLayout',
-      routes: [
-        {
-          path: '/login',
-          component: './user-login',
-        },
-      ],
-    },
+    // {
+    //   path: '/login',
+    //   component: '../layouts/BlankLayout',
+    //   routes: [
+    //     {
+    //       path: '/login',
+    //       component: './user-login',
+    //     },
+    //   ],
+    // },
     {
       path: '/user',
       component: '../layouts/UserLayout',
@@ -80,6 +80,12 @@ export default {
           path: '/user-login',
           component: './user-login',
         },
+        // {
+        //   path: '/test',
+        //   name: 'test',
+        //   icon: 'smile',
+        //   component: './test',
+        // },
       ],
     },
   ],
