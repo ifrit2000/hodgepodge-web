@@ -80,15 +80,21 @@ export default {
           path: '/user-login',
           component: './user-login',
         },
-        // {
-        //   path: '/test',
-        //   name: 'test',
-        //   icon: 'smile',
-        //   component: './test',
-        // },
+        {
+          name: 'table-list',
+          icon: 'smile',
+          path: '/table-list',
+          component: './table-list',
+        },
       ],
     },
   ],
+  // {
+  //   path: '/test',
+  //   name: 'test',
+  //   icon: 'smile',
+  //   component: './test',
+  // },
   disableRedirectHoist: true,
   /**
    * webpack 相关配置
