@@ -86,6 +86,18 @@ export default {
           path: '/table-list',
           component: './table-list',
         },
+        {
+          name: 't66y-table-list',
+          icon: 'smile',
+          path: '/t66y',
+          component: './t66y-table-list',
+        },
+        {
+          name: 'demo',
+          icon: 'smile',
+          path: '/demo',
+          component: './demo',
+        },
       ],
     },
   ],
@@ -106,4 +118,10 @@ export default {
   externals: { '@antv/data-set': 'DataSet' },
   ignoreMomentLocale: true,
   lessLoaderOptions: { javascriptEnabled: true },
+  proxy: {
+    "/api": {
+      target: "http://127.0.0.22",
+      changeOrigin: true
+    }
+  },
 };
