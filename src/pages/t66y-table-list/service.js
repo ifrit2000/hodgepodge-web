@@ -35,3 +35,7 @@ export async function updateRule(params) {
     },
   });
 }
+
+export async function findTopicList(params) {
+  return request.get('/t66y/topic/list', {params: {pageNum: 1, pageSize: 10}});
+}

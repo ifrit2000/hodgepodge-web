@@ -351,7 +351,7 @@ class T66yTableList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 't66yTableList/fetch',
+      type: 't66yTableList/fetch2',
     });
   }
 

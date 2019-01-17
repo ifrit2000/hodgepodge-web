@@ -6,7 +6,7 @@ export default {
   },
 
   effects: {
-    *process({payload}, {call, put}) {
+    * process({payload}, {call, put}) {
       yield put({
         type: 'show',
         payload: payload.data,
@@ -19,7 +19,7 @@ export default {
     show(state, action) {
       return {
         ...state,
-        data: action.payload
+        data: action.payload //this will overwrite state
       };
     },
   },

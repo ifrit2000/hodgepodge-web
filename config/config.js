@@ -119,9 +119,10 @@ export default {
   ignoreMomentLocale: true,
   lessLoaderOptions: { javascriptEnabled: true },
   proxy: {
-    "/api": {
-      target: "http://127.0.0.22",
-      changeOrigin: true
+    "/t66y/topic/list": {
+      "target": "http://127.0.0.1:8080/",
+      "changeOrigin": true,
+      // "pathRewrite": { "^/api" : "" }
     }
-  },
+  }
 };
