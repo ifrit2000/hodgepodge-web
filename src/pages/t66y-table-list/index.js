@@ -350,12 +350,11 @@ class T66yTableList extends PureComponent {
       newObj[key] = getValue(filtersArg[key]);
       return newObj;
     }, {});
-
     const params = {
-      current: pagination.current,
-      pageSize: pagination.pageSize,
       ...formValues,
       ...filters,
+      current: pagination.current,
+      pageSize: pagination.pageSize,
     };
     if (sorter.field) {
       params.sorter = `${sorter.field}_${sorter.order}`;
@@ -421,7 +420,6 @@ class T66yTableList extends PureComponent {
     const {dispatch, form, t66yTableList: {data: {pagination}}} = this.props;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-
       const values = {
         ...fieldsValue,
         updatedAt: fieldsValue.updatedAt && fieldsValue.updatedAt.valueOf(),

@@ -98,6 +98,12 @@ export default {
           path: '/demo',
           component: './demo',
         },
+        {
+          name: 'user-register',
+          icon: 'smile',
+          path: '/user-register',
+          component: './user-register',
+        },
       ],
     },
   ],
@@ -119,10 +125,9 @@ export default {
   ignoreMomentLocale: true,
   lessLoaderOptions: { javascriptEnabled: true },
   proxy: {
-    "/t66y/": {
-      "target": "http://127.0.0.1:8080/",
-      "changeOrigin": true,
-      // "pathRewrite": { "^/api" : "" }
-    }
-  }
+    '/t66y/': {
+      target: 'http://127.0.0.1:8080/',
+      changeOrigin: true,
+    },
+  },
 };
