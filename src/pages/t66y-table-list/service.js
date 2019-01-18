@@ -37,5 +37,30 @@ export async function updateRule(params) {
 }
 
 export async function findTopicList(params) {
-  return request.get('/t66y/topic/list', {params: {pageNum: 1, pageSize: 10}});
+  if (params === undefined) {
+    params = {pageNum: 1, pageSize: 10};
+  }
+  if (params.pageSize === undefined) {
+    params.pageSize = 10;
+  }
+  if (params.current === undefined) {
+    params.pageNum = 1;
+  } else {
+    params.pageNum = params.current;
+    params.current = undefined;
+  }
+
+  return request.get('/t66y/topic/list', {params: params});
+}
+
+export async function findTopicFidMap() {
+  return request.get('/t66y/fid');
+}
+
+export async function findTopicStatusMap() {
+  return request.get('/t66y/status');
+}
+
+export async function findTopicTitleList() {
+  return request.get('/t66y/topic/title');
 }

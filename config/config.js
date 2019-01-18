@@ -119,7 +119,7 @@ export default {
   ignoreMomentLocale: true,
   lessLoaderOptions: { javascriptEnabled: true },
   proxy: {
-    "/t66y/topic/list": {
+    "/t66y/": {
       "target": "http://127.0.0.1:8080/",
       "changeOrigin": true,
       // "pathRewrite": { "^/api" : "" }
