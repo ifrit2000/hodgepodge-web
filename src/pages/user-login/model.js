@@ -36,7 +36,7 @@ export default {
             return;
           }
         }
-        yield put(routerRedux.replace(redirect || '/'));
+        yield put(routerRedux.replace(redirect || '/welcome'));
       }
     },
 
@@ -47,6 +47,7 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
+      console.log(payload);
       setAuthority(payload.currentAuthority);
       return {
         ...state,

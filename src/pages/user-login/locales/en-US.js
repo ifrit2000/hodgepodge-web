@@ -1,7 +1,8 @@
 export default {
   'user-login.login.userName': 'userName',
   'user-login.login.password': 'password',
-  'user-login.login.message-invalid-credentials': 'Invalid username or password（admin/ant.design）',
+  'user-login.login.message-invalid-credentials':
+    'Invalid username or password（admin/ant.design）',
   'user-login.login.message-invalid-verification-code': 'Invalid verification code',
   'user-login.login.tab-login-credentials': 'Credentials',
   'user-login.login.tab-login-mobile': 'Mobile number',
@@ -60,7 +61,8 @@ export default {
   'user-login.client.placeholder':
     'Please describe your customer service, internal customers directly @ Name / job number',
   'user-login.invites.label': 'Inviting critics',
-  'user-login.invites.placeholder': 'Please direct @ Name / job number, you can invite up to 5 people',
+  'user-login.invites.placeholder':
+    'Please direct @ Name / job number, you can invite up to 5 people',
   'user-login.weight.label': 'Weight',
   'user-login.weight.placeholder': 'Please enter weight',
   'user-login.public.label': 'Target disclosure',

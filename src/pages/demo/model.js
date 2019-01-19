@@ -6,20 +6,19 @@ export default {
   },
 
   effects: {
-    * process({payload}, {call, put}) {
+    *process({ payload }, { call, put }) {
       yield put({
         type: 'show',
         payload: payload.data,
       });
     },
-
   },
 
   reducers: {
     show(state, action) {
       return {
         ...state,
-        data: action.payload //this will overwrite state
+        data: action.payload, //this will overwrite state
       };
     },
   },

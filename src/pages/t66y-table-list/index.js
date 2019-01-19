@@ -1,5 +1,5 @@
-import React, {Fragment, PureComponent} from 'react';
-import {connect} from 'dva';
+import React, { Fragment, PureComponent } from 'react';
+import { connect } from 'dva';
 import moment from 'moment';
 import {
   Badge,
@@ -23,22 +23,31 @@ import {
 import StandardTable from './components/StandardTable';
 
 import styles from './style.less';
-import {Link} from "umi";
+import { Link } from 'umi';
 
 const FormItem = Form.Item;
-const {Step} = Steps;
-const {TextArea} = Input;
-const {Option} = Select;
+const { Step } = Steps;
+const { TextArea } = Input;
+const { Option } = Select;
 const RadioGroup = Radio.Group;
 const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
-const statusList = ['success', 'processing', 'warning', 'warning', 'error', 'processing', 'warning', 'warning', 'error'];
-
+const statusList = [
+  'success',
+  'processing',
+  'warning',
+  'warning',
+  'error',
+  'processing',
+  'warning',
+  'warning',
+  'error',
+];
 
 const CreateForm = Form.create()(props => {
-  const {modalVisible, form, handleAdd, handleModalVisible} = props;
+  const { modalVisible, form, handleAdd, handleModalVisible } = props;
   const okHandle = () => {
     form.validateFields((err, fieldsValue) => {
       if (err) return;
@@ -54,10 +63,10 @@ const CreateForm = Form.create()(props => {
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
-      <FormItem labelCol={{span: 5}} wrapperCol={{span: 15}} label="描述">
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="描述">
         {form.getFieldDecorator('desc', {
-          rules: [{required: true, message: '请输入至少五个字符的规则描述！', min: 5}],
-        })(<Input placeholder="请输入"/>)}
+          rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
+        })(<Input placeholder="请输入" />)}
       </FormItem>
     </Modal>
   );
@@ -66,10 +75,8 @@ const CreateForm = Form.create()(props => {
 @Form.create()
 class UpdateForm extends PureComponent {
   static defaultProps = {
-    handleUpdate: () => {
-    },
-    handleUpdateModalVisible: () => {
-    },
+    handleUpdate: () => {},
+    handleUpdateModalVisible: () => {},
     values: {},
   };
 
@@ -91,17 +98,17 @@ class UpdateForm extends PureComponent {
     };
 
     this.formLayout = {
-      labelCol: {span: 7},
-      wrapperCol: {span: 13},
+      labelCol: { span: 7 },
+      wrapperCol: { span: 13 },
     };
   }
 
   handleNext = currentStep => {
-    const {form, handleUpdate} = this.props;
-    const {formVals: oldValue} = this.state;
+    const { form, handleUpdate } = this.props;
+    const { formVals: oldValue } = this.state;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
-      const formVals = {...oldValue, ...fieldsValue};
+      const formVals = { ...oldValue, ...fieldsValue };
       this.setState(
         {
           formVals,
@@ -118,28 +125,28 @@ class UpdateForm extends PureComponent {
   };
 
   backward = () => {
-    const {currentStep} = this.state;
+    const { currentStep } = this.state;
     this.setState({
       currentStep: currentStep - 1,
     });
   };
 
   forward = () => {
-    const {currentStep} = this.state;
+    const { currentStep } = this.state;
     this.setState({
       currentStep: currentStep + 1,
     });
   };
 
   renderContent = (currentStep, formVals) => {
-    const {form} = this.props;
+    const { form } = this.props;
     if (currentStep === 1) {
       return [
         <FormItem key="target" {...this.formLayout} label="监控对象">
           {form.getFieldDecorator('target', {
             initialValue: formVals.target,
           })(
-            <Select style={{width: '100%'}}>
+            <Select style={{ width: '100%' }}>
               <Option value="0">表一</Option>
               <Option value="1">表二</Option>
             </Select>
@@ -149,7 +156,7 @@ class UpdateForm extends PureComponent {
           {form.getFieldDecorator('template', {
             initialValue: formVals.template,
           })(
-            <Select style={{width: '100%'}}>
+            <Select style={{ width: '100%' }}>
               <Option value="0">规则模板一</Option>
               <Option value="1">规则模板二</Option>
             </Select>
@@ -171,10 +178,10 @@ class UpdateForm extends PureComponent {
       return [
         <FormItem key="time" {...this.formLayout} label="开始时间">
           {form.getFieldDecorator('time', {
-            rules: [{required: true, message: '请选择开始时间！'}],
+            rules: [{ required: true, message: '请选择开始时间！' }],
           })(
             <DatePicker
-              style={{width: '100%'}}
+              style={{ width: '100%' }}
               showTime
               format="YYYY-MM-DD HH:mm:ss"
               placeholder="选择开始时间"
@@ -185,7 +192,7 @@ class UpdateForm extends PureComponent {
           {form.getFieldDecorator('frequency', {
             initialValue: formVals.frequency,
           })(
-            <Select style={{width: '100%'}}>
+            <Select style={{ width: '100%' }}>
               <Option value="month">月</Option>
               <Option value="week">周</Option>
             </Select>
@@ -196,24 +203,24 @@ class UpdateForm extends PureComponent {
     return [
       <FormItem key="name" {...this.formLayout} label="规则名称">
         {form.getFieldDecorator('name', {
-          rules: [{required: true, message: '请输入规则名称！'}],
+          rules: [{ required: true, message: '请输入规则名称！' }],
           initialValue: formVals.name,
-        })(<Input placeholder="请输入"/>)}
+        })(<Input placeholder="请输入" />)}
       </FormItem>,
       <FormItem key="desc" {...this.formLayout} label="规则描述">
         {form.getFieldDecorator('desc', {
-          rules: [{required: true, message: '请输入至少五个字符的规则描述！', min: 5}],
+          rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
           initialValue: formVals.desc,
-        })(<TextArea rows={4} placeholder="请输入至少五个字符"/>)}
+        })(<TextArea rows={4} placeholder="请输入至少五个字符" />)}
       </FormItem>,
     ];
   };
 
   renderFooter = currentStep => {
-    const {handleUpdateModalVisible, values} = this.props;
+    const { handleUpdateModalVisible, values } = this.props;
     if (currentStep === 1) {
       return [
-        <Button key="back" style={{float: 'left'}} onClick={this.backward}>
+        <Button key="back" style={{ float: 'left' }} onClick={this.backward}>
           上一步
         </Button>,
         <Button key="cancel" onClick={() => handleUpdateModalVisible(false, values)}>
@@ -226,7 +233,7 @@ class UpdateForm extends PureComponent {
     }
     if (currentStep === 2) {
       return [
-        <Button key="back" style={{float: 'left'}} onClick={this.backward}>
+        <Button key="back" style={{ float: 'left' }} onClick={this.backward}>
           上一步
         </Button>,
         <Button key="cancel" onClick={() => handleUpdateModalVisible(false, values)}>
@@ -248,13 +255,13 @@ class UpdateForm extends PureComponent {
   };
 
   render() {
-    const {updateModalVisible, handleUpdateModalVisible, values} = this.props;
-    const {currentStep, formVals} = this.state;
+    const { updateModalVisible, handleUpdateModalVisible, values } = this.props;
+    const { currentStep, formVals } = this.state;
 
     return (
       <Modal
         width={640}
-        bodyStyle={{padding: '32px 40px 48px'}}
+        bodyStyle={{ padding: '32px 40px 48px' }}
         destroyOnClose
         title="规则配置"
         visible={updateModalVisible}
@@ -262,10 +269,10 @@ class UpdateForm extends PureComponent {
         onCancel={() => handleUpdateModalVisible(false, values)}
         afterClose={() => handleUpdateModalVisible()}
       >
-        <Steps style={{marginBottom: 28}} size="small" current={currentStep}>
-          <Step title="基本信息"/>
-          <Step title="配置规则属性"/>
-          <Step title="设定调度周期"/>
+        <Steps style={{ marginBottom: 28 }} size="small" current={currentStep}>
+          <Step title="基本信息" />
+          <Step title="配置规则属性" />
+          <Step title="设定调度周期" />
         </Steps>
         {this.renderContent(currentStep, formVals)}
       </Modal>
@@ -274,7 +281,7 @@ class UpdateForm extends PureComponent {
 }
 
 /* eslint react/no-multi-comp:0 */
-@connect(({t66yTableList, loading}) => ({
+@connect(({ t66yTableList, loading }) => ({
   t66yTableList,
   loading: loading.models.rule,
 }))
@@ -306,7 +313,7 @@ class T66yTableList extends PureComponent {
         dataIndex: 'topicStatus',
         sorter: true,
         render(val) {
-          return <Badge status={statusList[val]} text={topicStatusMap[val]}/>;
+          return <Badge status={statusList[val]} text={topicStatusMap[val]} />;
         },
       },
       {
@@ -320,7 +327,7 @@ class T66yTableList extends PureComponent {
         render: (text, record) => (
           <Fragment>
             <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
-            <Divider type="vertical"/>
+            <Divider type="vertical" />
             <a href="">订阅警报</a>
           </Fragment>
         ),
@@ -329,7 +336,7 @@ class T66yTableList extends PureComponent {
   }
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 't66yTableList/initializeTopicStatus',
     });
@@ -342,11 +349,11 @@ class T66yTableList extends PureComponent {
   }
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const {dispatch} = this.props;
-    const {formValues} = this.state;
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const filters = Object.keys(filtersArg).reduce((obj, key) => {
-      const newObj = {...obj};
+      const newObj = { ...obj };
       newObj[key] = getValue(filtersArg[key]);
       return newObj;
     }, {});
@@ -366,7 +373,7 @@ class T66yTableList extends PureComponent {
   };
 
   handleFormReset = () => {
-    const {form, dispatch} = this.props;
+    const { form, dispatch } = this.props;
     form.resetFields();
     this.setState({
       formValues: {},
@@ -378,15 +385,15 @@ class T66yTableList extends PureComponent {
   };
 
   toggleForm = () => {
-    const {expandForm} = this.state;
+    const { expandForm } = this.state;
     this.setState({
       expandForm: !expandForm,
     });
   };
 
   handleMenuClick = e => {
-    const {dispatch} = this.props;
-    const {selectedRows} = this.state;
+    const { dispatch } = this.props;
+    const { selectedRows } = this.state;
 
     if (!selectedRows) return;
     switch (e.key) {
@@ -417,7 +424,13 @@ class T66yTableList extends PureComponent {
   handleSearch = e => {
     e.preventDefault();
 
-    const {dispatch, form, t66yTableList: {data: {pagination}}} = this.props;
+    const {
+      dispatch,
+      form,
+      t66yTableList: {
+        data: { pagination },
+      },
+    } = this.props;
     form.validateFields((err, fieldsValue) => {
       if (err) return;
       const values = {
@@ -451,7 +464,7 @@ class T66yTableList extends PureComponent {
   };
 
   handleAdd = fields => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 't66yTableList/add',
       payload: {
@@ -464,7 +477,7 @@ class T66yTableList extends PureComponent {
   };
 
   handleUpdate = fields => {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 't66yTableList/update',
       payload: {
@@ -478,25 +491,31 @@ class T66yTableList extends PureComponent {
     this.handleUpdateModalVisible();
   };
 
-
   renderSimpleForm() {
     const {
-      form: {getFieldDecorator},
+      form: { getFieldDecorator },
     } = this.props;
 
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="主题名称">
-              {getFieldDecorator('keyWord')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('keyWord')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="板块筛选">
               {getFieldDecorator('topicFid')(
-                <Select placeholder="请选择" style={{width: '100%'}} showSearch allowClear={true}
-                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                <Select
+                  placeholder="请选择"
+                  style={{ width: '100%' }}
+                  showSearch
+                  allowClear={true}
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
                   {this.props.t66yTableList.topicFidSelectorOption}
                 </Select>
               )}
@@ -507,11 +526,11 @@ class T66yTableList extends PureComponent {
               <Button type="primary" htmlType="submit">
                 查询
               </Button>
-              <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+              <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
                 重置
               </Button>
-              <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-                展开 <Icon type="down"/>
+              <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+                展开 <Icon type="down" />
               </a>
             </span>
           </Col>
@@ -522,21 +541,21 @@ class T66yTableList extends PureComponent {
 
   renderAdvancedForm() {
     const {
-      form: {getFieldDecorator},
+      form: { getFieldDecorator },
     } = this.props;
 
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="主题名称">
-              {getFieldDecorator('keyWord')(<Input placeholder="请输入"/>)}
+              {getFieldDecorator('keyWord')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="板块筛选">
               {getFieldDecorator('topicFid')(
-                <Select placeholder="请选择" style={{width: '100%'}} allowClear={true}>
+                <Select placeholder="请选择" style={{ width: '100%' }} allowClear={true}>
                   {this.props.t66yTableList.topicFidSelectorOption}
                 </Select>
               )}
@@ -545,26 +564,33 @@ class T66yTableList extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="状态筛选">
               {getFieldDecorator('topicStatus')(
-                <Select placeholder="请选择" style={{width: '100%'}} allowClear={true}>
+                <Select placeholder="请选择" style={{ width: '100%' }} allowClear={true}>
                   {this.props.t66yTableList.topicStatusSelectorOption}
                 </Select>
               )}
             </FormItem>
           </Col>
         </Row>
-        <Row gutter={{md: 8, lg: 24, xl: 48}}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem label="更新日期">
               {getFieldDecorator('date')(
-                <DatePicker style={{width: '100%'}} placeholder="请输入更新日期"/>
+                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
               )}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
             <FormItem label="使用222状态">
               {getFieldDecorator('topicUrl')(
-                <Select placeholder="请选择" style={{width: '100%'}} showSearch allowClear={true}
-                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                <Select
+                  placeholder="请选择"
+                  style={{ width: '100%' }}
+                  showSearch
+                  allowClear={true}
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
                   {this.props.t66yTableList.topicTitleSelectorOption}
                 </Select>
               )}
@@ -573,7 +599,7 @@ class T66yTableList extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="使用状态">
               {getFieldDecorator('status4')(
-                <Select placeholder="请选择" style={{width: '100%'}}>
+                <Select placeholder="请选择" style={{ width: '100%' }}>
                   <Option value="0">关闭</Option>
                   <Option value="1">运行中</Option>
                 </Select>
@@ -581,16 +607,16 @@ class T66yTableList extends PureComponent {
             </FormItem>
           </Col>
         </Row>
-        <div style={{overflow: 'hidden'}}>
-          <div style={{float: 'right', marginBottom: 24}}>
+        <div style={{ overflow: 'hidden' }}>
+          <div style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
               查询
             </Button>
-            <Button style={{marginLeft: 8}} onClick={this.handleFormReset}>
+            <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
               重置
             </Button>
-            <a style={{marginLeft: 8}} onClick={this.toggleForm}>
-              收起 <Icon type="up"/>
+            <a style={{ marginLeft: 8 }} onClick={this.toggleForm}>
+              收起 <Icon type="up" />
             </a>
           </div>
         </div>
@@ -599,16 +625,16 @@ class T66yTableList extends PureComponent {
   }
 
   renderForm() {
-    const {expandForm} = this.state;
+    const { expandForm } = this.state;
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
   render() {
     const {
-      t66yTableList: {data},
+      t66yTableList: { data },
       loading,
     } = this.props;
-    const {selectedRows, modalVisible, updateModalVisible, stepFormValues} = this.state;
+    const { selectedRows, modalVisible, updateModalVisible, stepFormValues } = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         <Menu.Item key="remove">删除</Menu.Item>
@@ -638,7 +664,7 @@ class T66yTableList extends PureComponent {
                   <Button>批量操作</Button>
                   <Dropdown overlay={menu}>
                     <Button>
-                      更多操作 <Icon type="down"/>
+                      更多操作 <Icon type="down" />
                     </Button>
                   </Dropdown>
                 </span>
@@ -648,13 +674,16 @@ class T66yTableList extends PureComponent {
               selectedRows={selectedRows}
               loading={loading}
               data={data}
-              columns={this.getColumns(this.props.t66yTableList.topicFidMap, this.props.t66yTableList.topicStatusMap)}
+              columns={this.getColumns(
+                this.props.t66yTableList.topicFidMap,
+                this.props.t66yTableList.topicStatusMap
+              )}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
             />
           </div>
         </Card>
-        <CreateForm {...parentMethods} modalVisible={modalVisible}/>
+        <CreateForm {...parentMethods} modalVisible={modalVisible} />
         {stepFormValues && Object.keys(stepFormValues).length ? (
           <UpdateForm
             {...updateMethods}

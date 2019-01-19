@@ -1,7 +1,8 @@
 export default {
   'user-register.login.userName': 'userName',
   'user-register.login.password': 'password',
-  'user-register.login.message-invalid-credentials': 'Invalid username or password（admin/ant.design）',
+  'user-register.login.message-invalid-credentials':
+    'Invalid username or password（admin/ant.design）',
   'user-register.login.message-invalid-verification-code': 'Invalid verification code',
   'user-register.login.tab-login-credentials': 'Credentials',
   'user-register.login.tab-login-mobile': 'Mobile number',
@@ -60,7 +61,8 @@ export default {
   'user-register.client.placeholder':
     'Please describe your customer service, internal customers directly @ Name / job number',
   'user-register.invites.label': 'Inviting critics',
-  'user-register.invites.placeholder': 'Please direct @ Name / job number, you can invite up to 5 people',
+  'user-register.invites.placeholder':
+    'Please direct @ Name / job number, you can invite up to 5 people',
   'user-register.weight.label': 'Weight',
   'user-register.weight.placeholder': 'Please enter weight',
   'user-register.public.label': 'Target disclosure',

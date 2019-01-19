@@ -1,7 +1,7 @@
-import {addRule, findTopicList, queryRule, removeRule, updateRule} from './service';
-import {findTopicFidMap, findTopicStatusMap} from "@/pages/t66y-table-list/service";
-import React from "react";
-import {Select} from "antd";
+import { addRule, findTopicList, queryRule, removeRule, updateRule } from './service';
+import { findTopicFidMap, findTopicStatusMap } from '@/pages/t66y-table-list/service';
+import React from 'react';
+import { Select } from 'antd';
 
 export default {
   namespace: 't66yTableList',
@@ -14,31 +14,29 @@ export default {
   },
 
   effects: {
-    * initializeTopicStatus({}, {call, put}) {
+    *initializeTopicStatus({}, { call, put }) {
       let response = yield call(findTopicStatusMap);
-      const {
-        data: topicStatusMap,
-      } = response;
+      const { data: topicStatusMap } = response;
       const topicStatusSelectorOption = [];
       for (const key in topicStatusMap) {
-        topicStatusSelectorOption.push(<Select.Option key={key}>{topicStatusMap[key]}</Select.Option>)
+        topicStatusSelectorOption.push(
+          <Select.Option key={key}>{topicStatusMap[key]}</Select.Option>
+        );
       }
       yield put({
         type: 'initializePage',
         payload: {
           topicStatusSelectorOption: topicStatusSelectorOption,
-          topicStatusMap: topicStatusMap
+          topicStatusMap: topicStatusMap,
         },
       });
     },
-    * initializeTopicFid({}, {call, put}) {
+    *initializeTopicFid({}, { call, put }) {
       let response = yield call(findTopicFidMap);
-      const {
-        data: topicFidMap,
-      } = response;
+      const { data: topicFidMap } = response;
       const topicFidSelectorOption = [];
       for (const key in topicFidMap) {
-        topicFidSelectorOption.push(<Select.Option key={key}>{topicFidMap[key]}</Select.Option>)
+        topicFidSelectorOption.push(<Select.Option key={key}>{topicFidMap[key]}</Select.Option>);
       }
       yield put({
         type: 'initializePage',
@@ -48,23 +46,18 @@ export default {
         },
       });
     },
-    * fetch2({payload}, {call, put}) {
+    *fetch2({ payload }, { call, put }) {
       const response = yield call(findTopicList, payload);
       const {
-        data: {
-          list,
-          total,
-          pageSize,
-          pageNum: current,
-        },
+        data: { list, total, pageSize, pageNum: current },
       } = response;
       const result = {
         list: list,
         pagination: {
           total: total,
           pageSize: pageSize,
-          current: current
-        }
+          current: current,
+        },
       };
       yield put({
         type: 'save',
@@ -72,14 +65,14 @@ export default {
       });
     },
 
-    * fetch({payload}, {call, put}) {
+    *fetch({ payload }, { call, put }) {
       const response = yield call(queryRule, payload);
       yield put({
         type: 'save',
         payload: response,
       });
     },
-    * add({payload, callback}, {call, put}) {
+    *add({ payload, callback }, { call, put }) {
       const response = yield call(addRule, payload);
       yield put({
         type: 'save',
@@ -87,7 +80,7 @@ export default {
       });
       if (callback) callback();
     },
-    * remove({payload, callback}, {call, put}) {
+    *remove({ payload, callback }, { call, put }) {
       const response = yield call(removeRule, payload);
       yield put({
         type: 'save',
@@ -95,7 +88,7 @@ export default {
       });
       if (callback) callback();
     },
-    * update({payload, callback}, {call, put}) {
+    *update({ payload, callback }, { call, put }) {
       const response = yield call(updateRule, payload);
       yield put({
         type: 'save',
@@ -109,7 +102,7 @@ export default {
     initializePage(state, action) {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     },
     save(state, action) {

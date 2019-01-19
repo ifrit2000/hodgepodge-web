@@ -81,7 +81,9 @@ class LoginPage extends Component {
             {status === 'error' &&
               loginType === 'account' &&
               !submitting &&
-              this.renderMessage(formatMessage({ id: 'user-login.login.message-invalid-credentials' }))}
+              this.renderMessage(
+                formatMessage({ id: 'user-login.login.message-invalid-credentials' })
+              )}
             <UserName
               name="userName"
               placeholder={`${formatMessage({ id: 'user-login.login.userName' })}: admin or user`}

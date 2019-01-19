@@ -196,7 +196,10 @@ class UserRegister extends Component {
                 },
               ],
             })(
-              <Input size="large" placeholder={formatMessage({ id: 'user-register.email.placeholder' })} />
+              <Input
+                size="large"
+                placeholder={formatMessage({ id: 'user-register.email.placeholder' })}
+              />
             )}
           </FormItem>
           <FormItem help={help}>
@@ -293,7 +296,9 @@ class UserRegister extends Component {
                 })(
                   <Input
                     size="large"
-                    placeholder={formatMessage({ id: 'user-register.verification-code.placeholder' })}
+                    placeholder={formatMessage({
+                      id: 'user-register.verification-code.placeholder',
+                    })}
                   />
                 )}
               </Col>

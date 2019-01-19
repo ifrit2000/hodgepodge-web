@@ -38,7 +38,7 @@ export async function updateRule(params) {
 
 export async function findTopicList(params) {
   if (params === undefined) {
-    params = {pageNum: 1, pageSize: 10};
+    params = { pageNum: 1, pageSize: 10 };
   }
   if (params.pageSize === undefined) {
     params.pageSize = 10;
@@ -50,7 +50,7 @@ export async function findTopicList(params) {
     params.current = undefined;
   }
 
-  return request.get('/t66y/topic/list', {params: params});
+  return request.get('/t66y/topic/list', { params: params });
 }
 
 export async function findTopicFidMap() {
