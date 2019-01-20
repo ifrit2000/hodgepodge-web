@@ -2,8 +2,8 @@
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
-import { extend } from 'umi-request';
-import { notification } from 'antd';
+import {extend} from 'umi-request';
+import {notification} from 'antd';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -27,9 +27,9 @@ const codeMessage = {
  * 异常处理程序
  */
 const errorHandler = error => {
-  const { response = {} } = error;
+  const {response = {}} = error;
   const errortext = codeMessage[response.status] || response.statusText;
-  const { status, url } = response;
+  const {status, url} = response;
 
   notification.error({
     message: `请求错误 ${status}: ${url}`,
@@ -40,18 +40,48 @@ const errorHandler = error => {
 /**
  * 配置request请求时的默认参数
  */
-const request = extend({
-  errorHandler, // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
-});
-// request.interceptors.request.use((url, options) => {
-//   console.log(url);
-//   return (
-//     {
-//       url: `127.0.0.1:8080${url}`,
-//       options: {...options, interceptors: true},
+
+
+// class Request {
+//
+//   constructor() {
+//     this.umiRequest = extend({
+//       errorHandler, // 默认错误处理
+//       credentials: 'include', // 默认请求是否带上cookie
+//     });
+//   }
+//
+//   get = (url, option) => {
+//     const param = {
+//       ...option,
+//       method: "get"
+//     };
+//     return this.request(url, param);
+//   };
+//
+//
+//   request = (url, option) => {
+//     const token = sessionStorage.getItem("access_token");
+//     let param = option;
+//     if (token !== null) {
+//       param = {
+//         ...param,
+//         headers: {
+//           ...param.headers,
+//           access_token: token
+//         }
+//       }
 //     }
-//   );
-// });
+//     return this.umiRequest(url, param)
+//   }
+// }
+//
+// const request = new Request();
+
+
+const request=extend({
+      errorHandler, // 默认错误处理
+      credentials: 'include', // 默认请求是否带上cookie
+    });
 
 export default request;

@@ -1,8 +1,10 @@
-import { routerRedux } from 'dva/router';
-import { getPageQuery } from './utils/utils';
-import { setAuthority } from './utils/authority';
-import { reloadAuthorized } from './utils/Authorized';
-import { fakeAccountLogin, getFakeCaptcha } from './service';
+import {routerRedux} from 'dva/router';
+import {getPageQuery} from './utils/utils';
+import {setAuthority} from './utils/authority';
+import {reloadAuthorized} from './utils/Authorized';
+import {fakeAccountLogin, getFakeCaptcha} from './service';
+import {getPublicKey} from "@/pages/user-login/service";
+import handleResponse from "@/utils/response";
 
 export default {
   namespace: 'userLogin',
@@ -12,7 +14,16 @@ export default {
   },
 
   effects: {
-    *login({ payload }, { call, put }) {
+
+    * publicKey({}, {call, put}) {
+      const data = handleResponse(yield call(getPublicKey));
+      yield put({
+        type: 'getPublicKey',
+        payload: data,
+      });
+    },
+
+    * login({payload}, {call, put}) {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
@@ -23,7 +34,7 @@ export default {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
-        let { redirect } = params;
+        let {redirect} = params;
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {
@@ -40,14 +51,13 @@ export default {
       }
     },
 
-    *getCaptcha({ payload }, { call }) {
+    * getCaptcha({payload}, {call}) {
       yield call(getFakeCaptcha, payload);
     },
   },
 
   reducers: {
-    changeLoginStatus(state, { payload }) {
-      console.log(payload);
+    changeLoginStatus(state, {payload}) {
       setAuthority(payload.currentAuthority);
       return {
         ...state,
@@ -55,5 +65,11 @@ export default {
         type: payload.type,
       };
     },
+    getPublicKey(state, {payload}) {
+      return {
+        ...state,
+        publicKey: payload.publicKey
+      };
+    }
   },
 };

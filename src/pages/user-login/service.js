@@ -10,3 +10,10 @@ export async function fakeAccountLogin(params) {
 export async function getFakeCaptcha(mobile) {
   return request(`/api/user-login/captcha?mobile=${mobile}`);
 }
+
+export async function getPublicKey() {
+  const response = request.get(`/service-cipher/rsa/publicKey`);
+
+  return response;
+}
+

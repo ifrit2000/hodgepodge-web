@@ -104,12 +104,12 @@ export default {
           path: '/user-register',
           component: './user-register',
         },
-        {
-          name: 'analysis',
-          icon: 'smile',
-          path: '/analysis',
-          component: './analysis',
-        },
+        // {
+        //   name: 'analysis',
+        //   icon: 'smile',
+        //   path: '/analysis',
+        //   component: './analysis',
+        // },
       ],
     },
   ],
@@ -133,6 +133,10 @@ export default {
   proxy: {
     '/t66y/': {
       target: 'http://127.0.0.1:8080/',
+      changeOrigin: true,
+    },
+    '/service-cipher/': {
+      target: 'http://172.28.0.51:8080/',
       changeOrigin: true,
     },
   },

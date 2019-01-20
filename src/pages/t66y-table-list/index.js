@@ -511,7 +511,7 @@ class T66yTableList extends PureComponent {
                   placeholder="请选择"
                   style={{ width: '100%' }}
                   showSearch
-                  allowClear={true}
+                  allowClear
                   filterOption={(input, option) =>
                     option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   }
@@ -586,7 +586,7 @@ class T66yTableList extends PureComponent {
                   placeholder="请选择"
                   style={{ width: '100%' }}
                   showSearch
-                  allowClear={true}
+                  allowClear
                   filterOption={(input, option) =>
                     option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                   }
@@ -650,6 +650,7 @@ class T66yTableList extends PureComponent {
       handleUpdateModalVisible: this.handleUpdateModalVisible,
       handleUpdate: this.handleUpdate,
     };
+
     return (
       <Fragment>
         <Card bordered={false}>

@@ -1,7 +1,7 @@
-import { addRule, findTopicList, queryRule, removeRule, updateRule } from './service';
 import { findTopicFidMap, findTopicStatusMap } from '@/pages/t66y-table-list/service';
 import React from 'react';
 import { Select } from 'antd';
+import { addRule, findTopicList, queryRule, removeRule, updateRule } from './service';
 
 export default {
   namespace: 't66yTableList',
@@ -15,7 +15,7 @@ export default {
 
   effects: {
     *initializeTopicStatus({}, { call, put }) {
-      let response = yield call(findTopicStatusMap);
+      const response = yield call(findTopicStatusMap);
       const { data: topicStatusMap } = response;
       const topicStatusSelectorOption = [];
       for (const key in topicStatusMap) {
@@ -26,13 +26,13 @@ export default {
       yield put({
         type: 'initializePage',
         payload: {
-          topicStatusSelectorOption: topicStatusSelectorOption,
-          topicStatusMap: topicStatusMap,
+          topicStatusSelectorOption,
+          topicStatusMap,
         },
       });
     },
     *initializeTopicFid({}, { call, put }) {
-      let response = yield call(findTopicFidMap);
+      const response = yield call(findTopicFidMap);
       const { data: topicFidMap } = response;
       const topicFidSelectorOption = [];
       for (const key in topicFidMap) {
@@ -41,8 +41,8 @@ export default {
       yield put({
         type: 'initializePage',
         payload: {
-          topicFidSelectorOption: topicFidSelectorOption,
-          topicFidMap: topicFidMap,
+          topicFidSelectorOption,
+          topicFidMap,
         },
       });
     },
@@ -52,11 +52,11 @@ export default {
         data: { list, total, pageSize, pageNum: current },
       } = response;
       const result = {
-        list: list,
+        list,
         pagination: {
-          total: total,
-          pageSize: pageSize,
-          current: current,
+          total,
+          pageSize,
+          current,
         },
       };
       yield put({
