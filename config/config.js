@@ -136,7 +136,11 @@ export default {
       changeOrigin: true,
     },
     '/service-cipher/': {
-      target: 'http://172.28.0.51:8080/',
+      target: 'http://172.28.0.51/',
+      changeOrigin: true,
+    },
+    '/service-auth/': {
+      target: 'http://172.28.0.51/',
       changeOrigin: true,
     },
   },

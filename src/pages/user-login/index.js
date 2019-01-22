@@ -51,11 +51,15 @@ class LoginPage extends Component {
     const {type} = this.state;
     if (!err) {
       const {dispatch} = this.props;
+      const {userLogin} = this.props;
+      const {publicKey, keyId} = userLogin;
       dispatch({
         type: 'userLogin/login',
         payload: {
           ...values,
           type,
+          publicKey,
+          keyId
         },
       });
     }
@@ -73,9 +77,8 @@ class LoginPage extends Component {
 
   render() {
     const {userLogin, submitting} = this.props;
-    const {status, type: loginType, publicKey} = userLogin;
+    const {status, type: loginType} = userLogin;
     const {type, autoLogin} = this.state;
-    console.log(publicKey);
     return (
       <div className={styles.main}>
         <Login

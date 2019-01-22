@@ -2,8 +2,8 @@ import {routerRedux} from 'dva/router';
 import {getPageQuery} from './utils/utils';
 import {setAuthority} from './utils/authority';
 import {reloadAuthorized} from './utils/Authorized';
-import {fakeAccountLogin, getFakeCaptcha} from './service';
-import {getPublicKey} from "@/pages/user-login/service";
+import {getFakeCaptcha} from './service';
+import {getPublicKey, userAuthorizeToken} from "@/pages/user-login/service";
 import handleResponse from "@/utils/response";
 
 export default {
@@ -24,13 +24,21 @@ export default {
     },
 
     * login({payload}, {call, put}) {
-      const response = yield call(fakeAccountLogin, payload);
+      const response = yield call(userAuthorizeToken, payload);
+      let status = "ok";
+      if (!response.code.endsWith("00")) {
+        status = "error"
+      }
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: {
+          status,
+          type: "account"
+        },
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (status === 'ok') {
+        sessionStorage.setItem("token", response.data.token);
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
@@ -68,7 +76,8 @@ export default {
     getPublicKey(state, {payload}) {
       return {
         ...state,
-        publicKey: payload.publicKey
+        publicKey: payload.publicKey,
+        keyId: payload.keyId,
       };
     }
   },

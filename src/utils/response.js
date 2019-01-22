@@ -4,8 +4,9 @@ const handleResponse = (response) => {
   if (!response.code.endsWith("00")) {
     notification.error({
       message: `请求错误 `,
-      description: response.msg,
+      description: response.code,
     });
+    return null;
   }
   return response.data;
 };
