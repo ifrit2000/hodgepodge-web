@@ -20,6 +20,7 @@ class Demo extends Component {
 
   render() {
     let data = this.props.demo.data;
+    console.log(this.props.location);
     return (
       <div>
         <Input placeholder={data} disabled={true} />

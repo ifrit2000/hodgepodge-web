@@ -38,7 +38,7 @@ export default {
       });
       // Login successfully
       if (status === 'ok') {
-        sessionStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.data.token);
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();

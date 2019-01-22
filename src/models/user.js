@@ -19,7 +19,7 @@ export default {
       });
     },
     * fetchCurrent(_, {call, put}) {
-      const token = sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
       if (token !== null) {
         console.log(token);
         const userInfo = handleResponse(yield call(queryCurrentUser, token));
