@@ -12,7 +12,7 @@ const {Step} = Steps;
 const {Description} = DescriptionList;
 const ButtonGroup = Button.Group;
 
-const getWindowWidth = () => window.innerWidth || document.documentElement.clientWidth;
+const getWindowWidth = () => window.innerWidth && document.documentElement.clientWidth;
 
 const menu = (
   <Menu>
@@ -170,6 +170,8 @@ const columns = [
   t66yDetail,
   // loading: loading.global,
   loading: loading.effects['t66yDetail/fetchAdvanced'] || loading.effects['t66yDetail/fetchTopicDetail'],
+  // loading:  loading.effects['t66yDetail/fetchTopicDetail'],
+  // loading:  loading.models.t66yDetail,
 }))
 class AdvancedProfile extends Component {
   state = {
@@ -180,7 +182,6 @@ class AdvancedProfile extends Component {
   componentDidMount() {
     const {dispatch} = this.props;
     const topicId = this.props.location.query.topicId;
-    console.log("componentDidMount topic:" + topicId);
     dispatch({
       type: 't66yDetail/fetchAdvanced',
     });
@@ -188,7 +189,6 @@ class AdvancedProfile extends Component {
       type: 't66yDetail/fetchTopicDetail',
       payload: {topicId}
     });
-
 
     this.setStepDirection();
     window.addEventListener('resize', this.setStepDirection, {passive: true});
@@ -222,8 +222,7 @@ class AdvancedProfile extends Component {
   render() {
     const {stepDirection, operationkey} = this.state;
     const {t66yDetail, loading} = this.props;
-    const {advancedOperation1, advancedOperation2, advancedOperation3, topic} = t66yDetail;
-    console.log(t66yDetail);
+    const {advancedOperation1, advancedOperation2, advancedOperation3, topic = {}} = t66yDetail;
     const contentList = {
       tab1: (
         <Table
@@ -250,6 +249,28 @@ class AdvancedProfile extends Component {
         />
       ),
     };
+    // https://www.cnblogs.com/huzidaha/articles/6598442.html
+          console.log(t66yDetail);
+    let images = (<div></div>);
+
+    if (loading === false) {
+      const imageDTOList = topic.imageDTOList;
+      imageDTOList.map((image) => {
+        const {dispatch} = this.props;
+        dispatch({
+          type: 't66yDetail/fetchImage',
+          payload: image.fileId
+        });
+      });
+
+
+      images = (
+        <Card title="流程进度1" style={{marginBottom: 24}} bordered={false}>
+          <img
+            src={"http://127.0.0.1:8080/t66y/image/9f948f75666cc6eabe572be28605142426c4f52347db8598ddd54fdf018c349a3c36057611c5d8cf03cf43a7af5ea34b278bf058b0f4187621c683e9a7f71dd7"}/>
+        </Card>
+      );
+    }
 
     return (
 
@@ -262,16 +283,19 @@ class AdvancedProfile extends Component {
         action={action}
         content={description}
         extraContent={extra}
-        tabList={tabList}
+        // tabList={tabList}
         loading={loading}
       >
+        {images}
         <Card title="流程进度" style={{marginBottom: 24}} bordered={false}>
           <Steps direction={stepDirection} progressDot={customDot} current={1}>
             <Step title="创建项目" description={desc1}/>
             <Step title="部门初审" description={desc2}/>
             <Step title="财务复核"/>
             <Step title="完成"/>
+
           </Steps>
+
         </Card>
         <Card title="用户信息" style={{marginBottom: 24}} bordered={false}>
           <DescriptionList style={{marginBottom: 24}}>

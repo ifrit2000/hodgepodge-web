@@ -1,5 +1,5 @@
 import {queryAdvancedProfile} from './service';
-import {fetchTopicDetail} from "@/pages/t66y-advanced-profile/service";
+import {queryImage, queryTopicDetail} from "@/pages/t66y-advanced-profile/service";
 import handleResponse from "@/utils/response";
 
 export default {
@@ -9,14 +9,22 @@ export default {
     advancedOperation1: [],
     advancedOperation2: [],
     advancedOperation3: [],
+    imageList: []
   },
 
   effects: {
     * fetchTopicDetail({payload}, {call, put}) {
-      const response = handleResponse(yield call(fetchTopicDetail, payload.topicId));
+      const response = handleResponse(yield call(queryTopicDetail, payload.topicId));
       yield put({
         type: 'showTopic',
         payload: response,
+      });
+    },
+    * fetchImage({payload}, {call, put}) {
+      const response = handleResponse(yield call(queryImage, payload));
+      yield put({
+        type: 'showImage',
+        payload: {payload: response},
       });
     },
     * fetchAdvanced(_, {call, put}) {
@@ -40,9 +48,15 @@ export default {
       console.log(action);
       return {
         ...state,
-        topic: action.payload
+        topic: action.payload,
       }
-    }
+    },
+    showImage(state, action) {
+      return {
+        ...state,
+      ...action.payload,
+      }
+    },
   },
 
 
