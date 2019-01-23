@@ -89,7 +89,7 @@ export default {
         {
           name: 't66y-table-list',
           icon: 'smile',
-          path: '/t66y',
+          path: '/t66y/:test',
           component: './t66y-table-list',
         },
         {

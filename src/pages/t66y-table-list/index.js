@@ -357,7 +357,6 @@ class T66yTableList extends PureComponent {
     ];
   }
 
-
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const {dispatch} = this.props;
     const {formValues} = this.state;
@@ -367,12 +366,18 @@ class T66yTableList extends PureComponent {
       newObj[key] = getValue(filtersArg[key]);
       return newObj;
     }, {});
+    let current = this.props.location.query.current || pagination.current;
+    let pageSize = this.props.location.query.pageSize || pagination.pageSize;
+    console.log(current);
+    console.log(pageSize);
+
     const params = {
       ...formValues,
       ...filters,
-      current: pagination.current,
-      pageSize: pagination.pageSize,
+      current,
+      pageSize,
     };
+
     if (sorter.field) {
       params.sorter = `${sorter.field}_${sorter.order}`;
     }
@@ -644,6 +649,7 @@ class T66yTableList extends PureComponent {
       t66yTableList: {data},
       loading,
     } = this.props;
+    console.log(this.props.location);
     const {selectedRows, modalVisible, updateModalVisible, stepFormValues} = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
