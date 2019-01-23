@@ -104,15 +104,27 @@ export default {
           path: '/user-register',
           component: './user-register',
         },
-        // {
-        //   name: 'analysis',
-        //   icon: 'smile',
-        //   path: '/analysis',
-        //   component: './analysis',
-        // },
+        {
+          name: 'advanced-profile',
+          icon: 'smile',
+          path: '/advanced-profile',
+          component: './advanced-profile',
+        },
+        {
+          name: 't66y-advanced-profile',
+          icon: 'smile',
+          path: '/t66y-advanced-profile',
+          component: './t66y-advanced-profile',
+        },
       ],
     },
   ],
+  // {
+  //   name: 'analysis',
+  //   icon: 'smile',
+  //   path: '/analysis',
+  //   component: './analysis',
+  // },
   // {
   //   path: '/test',
   //   name: 'test',

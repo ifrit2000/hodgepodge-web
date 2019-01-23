@@ -316,11 +316,11 @@ class T66yTableList extends PureComponent {
       {
         title: '标题',
         dataIndex: 'topicTitle',
-        render: val =>
+        render: (val, row) =>
           <Link to={
             {
-              pathname: '/demo',
-              query: {id: "1"}
+              pathname: '/t66y-advanced-profile',
+              query: {topic: row}
             }
           }>{val}
           </Link>,
@@ -682,6 +682,7 @@ class T66yTableList extends PureComponent {
               )}
             </div>
             <StandardTable
+              rowKey="topicId"
               selectedRows={selectedRows}
               loading={loading}
               data={data}
@@ -694,11 +695,17 @@ class T66yTableList extends PureComponent {
 
               onRow={(record) => {
                 return {
-                  onClick: (event) => {console.log("onRow")},       // 点击行
-                  onDoubleClick: (event) => {},
-                  onContextMenu: (event) => {},
-                  onMouseEnter: (event) => {},  // 鼠标移入行
-                  onMouseLeave: (event) => {}
+                  onClick: (event) => {
+
+                  },       // 点击行
+                  onDoubleClick: (event) => {
+                  },
+                  onContextMenu: (event) => {
+                  },
+                  onMouseEnter: (event) => {
+                  },  // 鼠标移入行
+                  onMouseLeave: (event) => {
+                  }
                 };
               }}
             />
