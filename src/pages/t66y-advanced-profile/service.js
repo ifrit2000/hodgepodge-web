@@ -5,10 +5,10 @@ export async function queryAdvancedProfile() {
 }
 
 export async function queryTopicDetail(topicId) {
-  return request('/t66y/topic/'+topicId);
+  return request('/t66y/topic/' + topicId);
 }
 
 
 export async function queryImage(fileId) {
-  return request('/t66y/image/'+fileId);
+  return request('/t66y/image/' + fileId);
 }
