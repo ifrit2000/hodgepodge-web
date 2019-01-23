@@ -320,7 +320,7 @@ class T66yTableList extends PureComponent {
           <Link to={
             {
               pathname: '/t66y-advanced-profile',
-              query: {topic: row}
+              query: {topicId: row.topicId}
             }
           }>{val}
           </Link>,
@@ -395,7 +395,6 @@ class T66yTableList extends PureComponent {
     });
     dispatch({
       type: 't66yTableList/fetch2',
-      payload: {},
     });
   };
 
@@ -649,7 +648,6 @@ class T66yTableList extends PureComponent {
       t66yTableList: {data},
       loading,
     } = this.props;
-    console.log(this.props.location);
     const {selectedRows, modalVisible, updateModalVisible, stepFormValues} = this.state;
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>

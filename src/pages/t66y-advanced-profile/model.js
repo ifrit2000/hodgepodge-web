@@ -1,7 +1,9 @@
-import { queryAdvancedProfile } from './service';
+import {queryAdvancedProfile} from './service';
+import {fetchTopicDetail} from "@/pages/t66y-advanced-profile/service";
+import handleResponse from "@/utils/response";
 
 export default {
-  namespace: 'advancedProfile',
+  namespace: 't66yDetail',
 
   state: {
     advancedOperation1: [],
@@ -10,7 +12,14 @@ export default {
   },
 
   effects: {
-    *fetchAdvanced(_, { call, put }) {
+    * fetchTopicDetail({payload}, {call, put}) {
+      const response = handleResponse(yield call(fetchTopicDetail, payload.topicId));
+      yield put({
+        type: 'showTopic',
+        payload: response,
+      });
+    },
+    * fetchAdvanced(_, {call, put}) {
       const response = yield call(queryAdvancedProfile);
       yield put({
         type: 'show',
@@ -20,11 +29,21 @@ export default {
   },
 
   reducers: {
-    show(state, { payload }) {
+    show(state, {payload}) {
+
       return {
         ...state,
         ...payload,
       };
     },
+    showTopic(state, action) {
+      console.log(action);
+      return {
+        ...state,
+        topic: action.payload
+      }
+    }
   },
+
+
 };

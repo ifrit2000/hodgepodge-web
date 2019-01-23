@@ -21,14 +21,12 @@ export default {
     * fetchCurrent(_, {call, put}) {
       const token = localStorage.getItem("token");
       if (token !== null) {
-        console.log(token);
         const userInfo = handleResponse(yield call(queryCurrentUser, token));
         if (userInfo !== null) {
           yield put({
             type: 'saveCurrentUser',
             payload: userInfo,
           });
-          console.log(1);
           return;
         }
       }

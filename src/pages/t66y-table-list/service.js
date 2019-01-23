@@ -50,7 +50,7 @@ export async function findTopicList(params) {
     params.current = undefined;
   }
 
-  return request.get('/t66y/topic/list', { params: params });
+  return request.get('/t66y/topic', { params: params });
 }
 
 export async function findTopicFidMap() {
