@@ -368,8 +368,6 @@ class T66yTableList extends PureComponent {
     }, {});
     let current = this.props.location.query.current || pagination.current;
     let pageSize = this.props.location.query.pageSize || pagination.pageSize;
-    console.log(current);
-    console.log(pageSize);
 
     const params = {
       ...formValues,
