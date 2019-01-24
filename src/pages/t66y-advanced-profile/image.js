@@ -11,7 +11,7 @@ class Image extends Component {
   componentDidMount() {
     const {dispatch, imageList, imageModel} = this.props;
     const {images} = imageModel;
-    if (images === undefined) {
+    if (imageList !== undefined) {
       dispatch({
         type: 'imageModel/fetchImage',
         payload: imageList
@@ -24,7 +24,7 @@ class Image extends Component {
     const {images} = imageModel;
     let imgs = [];
     if (loading === false) {
-      imgs = images.map((b64, index) => (<p><img key={index} alt='' src={b64}/></p>));
+      imgs = images.map((b64, index) => (<p key={index * 100}><img key={index} alt='' src={b64}/></p>));
     }
     return (<Card title="流程进度" style={{marginBottom: 24}} bordered={false}>
       {imgs}

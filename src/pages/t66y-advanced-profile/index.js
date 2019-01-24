@@ -107,12 +107,11 @@ class AdvancedProfile extends Component {
   render() {
     const {t66yDetail, loading} = this.props;
     const {topic = {}} = t66yDetail;
-    let image = <div/>;
 
-    if (loading === false) {
-      // https://www.cnblogs.com/huzidaha/articles/6598442.html
-      image = <Image imageList={topic.imageDTOList}/>;
-    }
+    // if (loading === false) {
+    //   // https://www.cnblogs.com/huzidaha/articles/6598442.html
+    //   image =;
+    // }
 
     return (
       <PageHeaderWrapper
@@ -125,7 +124,7 @@ class AdvancedProfile extends Component {
         extraContent={extra}
         loading={loading}
       >
-        {image}
+        <Image imageList={topic.imageDTOList}/>
       </PageHeaderWrapper>
     );
   }
